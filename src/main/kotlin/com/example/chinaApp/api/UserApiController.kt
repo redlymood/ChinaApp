@@ -2,6 +2,7 @@ package com.example.chinaApp.api;
 
 import com.example.chinaApp.JwtTokenUtil
 import com.example.chinaApp.dao.dto.LoginRequest
+import com.example.chinaApp.dao.dto.RegisterRequest
 import com.example.chinaApp.dao.service.UserDaoService
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
@@ -20,7 +21,7 @@ class UserApiController (
     private val authenticationManager: AuthenticationManager
 ){
 
-    @PostMapping("/api/auth/login")
+    @PostMapping("/login")
     fun login( @RequestBody request: LoginRequest): ResponseEntity<*> {
         return try {
             val authentication = authenticationManager.authenticate(
@@ -37,4 +38,15 @@ class UserApiController (
 
     }
 
+
+    @PostMapping("/register")
+    fun register(@RequestBody request: RegisterRequest): ResponseEntity<*> {
+        val user = userService.findByEmail(request.email)
+        return if (user != null) {
+            ResponseEntity.status(HttpStatus.CONFLICT).build<Any>()
+        } else {
+            userService.create(request)
+            ResponseEntity.status(HttpStatus.CREATED).build<Any>()
+        }
+    }
 }

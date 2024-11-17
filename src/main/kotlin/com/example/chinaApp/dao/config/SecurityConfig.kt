@@ -1,5 +1,6 @@
 package com.example.chinaApp.dao.config
 
+import com.example.chinaApp.dao.filters.JwtTokenFilter
 import com.example.chinaApp.dao.repository.UserRepository
 import com.example.chinaApp.dao.service.JwtUserDetailsService
 import org.springframework.beans.factory.annotation.Autowired
@@ -19,6 +20,7 @@ import org.springframework.security.config.http.SessionCreationPolicy
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.security.web.SecurityFilterChain
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter
 
 @EnableWebSecurity
 @Configuration
@@ -38,6 +40,7 @@ class WebSecurityConfig {
         authProvider.setPasswordEncoder(passwordEncoder())
         return authProvider
     }
+
     @Throws(Exception::class)
     protected fun configure(auth: AuthenticationManagerBuilder) {
         auth.authenticationProvider(authenticationProvider())
@@ -54,19 +57,16 @@ class WebSecurityConfig {
 
     @Bean
     @Throws(Exception::class)
-    fun filterChain(http: HttpSecurity): SecurityFilterChain {
-        http.csrf { csrf: CsrfConfigurer<HttpSecurity> -> csrf.disable() }
-            .sessionManagement { session: SessionManagementConfigurer<HttpSecurity?> ->
-                session.sessionCreationPolicy(
-                    SessionCreationPolicy.STATELESS
-                )
-            }
-            .authorizeHttpRequests { auth ->
-                auth.requestMatchers("/api/auth/**").permitAll()
-                    .requestMatchers("/api/test/**").permitAll()
-                    .anyRequest().authenticated()
-            }
+    fun filterChain(http: HttpSecurity, jwtTokenFilter: JwtTokenFilter): SecurityFilterChain {
+        http.authorizeHttpRequests { auth ->
+            auth.requestMatchers("/api/auth/**").permitAll()
+                .anyRequest().authenticated()
+        }
 
+        http.csrf { it.disable() }
+        http.formLogin { it.disable() }
+        http.cors { it.disable() }
+        http.addFilterBefore(jwtTokenFilter, UsernamePasswordAuthenticationFilter::class.java)
         return http.build()
     }
 }

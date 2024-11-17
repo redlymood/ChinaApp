@@ -47,7 +47,7 @@ import java.util.*
 
 
 @Entity
-@Table(name = "user")
+@Table(name = "user", schema = "public")
 @EntityListeners(
     AuditingEntityListener::class
 )
