@@ -1,68 +1,72 @@
 package com.example.chinaApp.dao.config
 
+import com.example.chinaApp.dao.repository.UserRepository
+import com.example.chinaApp.dao.service.JwtUserDetailsService
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
+import org.springframework.context.annotation.Import
 import org.springframework.security.authentication.AuthenticationManager
 import org.springframework.security.authentication.ProviderManager
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider
-import org.springframework.security.config.Customizer
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder
+import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity
-import org.springframework.security.core.userdetails.User
-import org.springframework.security.core.userdetails.UserDetails
-import org.springframework.security.core.userdetails.UserDetailsService
-import org.springframework.security.crypto.factory.PasswordEncoderFactories
+import org.springframework.security.config.annotation.web.configurers.CsrfConfigurer
+import org.springframework.security.config.annotation.web.configurers.SessionManagementConfigurer
+import org.springframework.security.config.http.SessionCreationPolicy
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.security.crypto.password.PasswordEncoder
-import org.springframework.security.provisioning.InMemoryUserDetailsManager
 import org.springframework.security.web.SecurityFilterChain
 
-
-@Configuration
 @EnableWebSecurity
-class SecurityConfig {
-
-    @Bean
-    @Throws(Exception::class)
-    fun securityFilterChain(http: HttpSecurity): SecurityFilterChain? {
-        http
-            .authorizeHttpRequests { authorize ->
-                authorize
-                    .anyRequest().authenticated()
-            }
-            .httpBasic(Customizer.withDefaults())
-            .formLogin(Customizer.withDefaults())
-
-        return http.build()
-    }
-
-
-    @Bean
-    fun authenticationManager(
-        userDetailsService: UserDetailsService?,
-        passwordEncoder: PasswordEncoder?
-    ): AuthenticationManager {
-        val authenticationProvider = DaoAuthenticationProvider()
-        authenticationProvider.setUserDetailsService(userDetailsService)
-        authenticationProvider.setPasswordEncoder(passwordEncoder)
-
-        return ProviderManager(authenticationProvider)
-    }
-
-    @Bean
-    fun userDetailsService(): UserDetailsService {
-        val userDetails: UserDetails = User.withUsername("name")
-            .username("name")
-            .password("password")
-            .roles("USER")
-            .build()
-
-        return InMemoryUserDetailsManager(userDetails)
-    }
-
+@Configuration
+class WebSecurityConfig {
+    @Autowired
+    private lateinit var jwtUserDetailsService: JwtUserDetailsService
 
     @Bean
     fun passwordEncoder(): PasswordEncoder {
-        return PasswordEncoderFactories.createDelegatingPasswordEncoder()
+        return BCryptPasswordEncoder()
     }
 
+    @Bean
+    fun authenticationProvider(): DaoAuthenticationProvider? {
+        val authProvider = DaoAuthenticationProvider()
+        authProvider.setUserDetailsService(jwtUserDetailsService)
+        authProvider.setPasswordEncoder(passwordEncoder())
+        return authProvider
+    }
+    @Throws(Exception::class)
+    protected fun configure(auth: AuthenticationManagerBuilder) {
+        auth.authenticationProvider(authenticationProvider())
+    }
+
+    @Bean
+    @Throws(java.lang.Exception::class)
+    fun authenticationManager(
+        authenticationConfiguration: AuthenticationConfiguration
+    ): AuthenticationManager {
+        return authenticationConfiguration.authenticationManager
+    }
+
+
+    @Bean
+    @Throws(Exception::class)
+    fun filterChain(http: HttpSecurity): SecurityFilterChain {
+        http.csrf { csrf: CsrfConfigurer<HttpSecurity> -> csrf.disable() }
+            .sessionManagement { session: SessionManagementConfigurer<HttpSecurity?> ->
+                session.sessionCreationPolicy(
+                    SessionCreationPolicy.STATELESS
+                )
+            }
+            .authorizeHttpRequests { auth ->
+                auth.requestMatchers("/api/auth/**").permitAll()
+                    .requestMatchers("/api/test/**").permitAll()
+                    .anyRequest().authenticated()
+            }
+
+        return http.build()
+    }
 }

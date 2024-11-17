@@ -21,6 +21,12 @@ venv
 node_modules
 .sass-cache
 
+# Compiled Java files
+.gradle
+build/
+
+
+# IDE specific files
 .idea
 *.swp
 .vscode/
