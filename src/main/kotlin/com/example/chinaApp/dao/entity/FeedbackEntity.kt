@@ -9,33 +9,28 @@ import java.time.OffsetDateTime
 import java.util.*
 
 @Entity
-@Getter
-@Setter
-@Table(name = "feedback")
+@Table(name = "feedback", schema = "public")
 @EntityListeners(
     AuditingEntityListener::class
 )
-@AllArgsConstructor
-@NoArgsConstructor
-@Builder
-class FeedbackEntity {
+data class FeedbackEntity(
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.UUID)
-    private var id: UUID? = null
+    var id: UUID? = null,
 
     @Column(name = "feedback_text")
-    private var feedbackText: String? = null
+    var feedbackText: String? = null,
 
     @Column(name = "creation_date")
     @CreatedDate
-    private var creationDate: OffsetDateTime? = null
+    var creationDate: OffsetDateTime? = null,
 
     @Column(name = "last_update_date")
     @LastModifiedDate
-    private var lastUpdateDate: OffsetDateTime? = null
+    var lastUpdateDate: OffsetDateTime? = null,
 
     @ManyToOne
     @JoinColumn(name = "user_id", referencedColumnName = "id")
-    private var user: UserEntity? = null
-}
+    var user: UserEntity? = null
+)

@@ -1,0 +1,43 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1731859129045-1
+      author: mike
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_feedback
+                  name: id
+                  type: UUID
+              - column:
+                  name: feedback_text
+                  type: VARCHAR(255)
+              - column:
+                  name: creation_date
+                  type: timestamp
+              - column:
+                  name: last_update_date
+                  type: timestamp
+              - column:
+                  name: user_id
+                  type: UUID
+            schemaName: public
+            tableName: feedback
+  - changeSet:
+      id: 1731859129045-2
+      author: mike
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: user_id
+            baseTableName: feedback
+            baseTableSchemaName: public
+            constraintName: FK_FEEDBACK_ON_USER
+            referencedColumnNames: id
+            referencedTableName: user
+            referencedTableSchemaName: public
+

@@ -1,0 +1,35 @@
+databaseChangeLog:
+  - changeSet:
+      id: 0
+      author: mike
+      changes:
+        - createTable:
+            tableName: user
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_user
+                  name: id
+                  type: UUID
+              - column:
+                  name: email
+                  type: VARCHAR(255)
+              - column:
+                  name: name
+                  type: VARCHAR(255)
+              - column:
+                  name: password
+                  type: VARCHAR(255)
+              - column:
+                  name: role
+                  type: VARCHAR(255)
+              - column:
+                  name: creation_date
+                  type: timestamp
+              - column:
+                  name: last_update_date
+                  type: timestamp
+  - include:
+      file: db/changelog/2024/11/17-01-changelog.yaml

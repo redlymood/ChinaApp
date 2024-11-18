@@ -13,6 +13,7 @@ class FeedbackDaoService {
     private val feedbackRepository: FeedbackRepository? = null
 
     fun findAll(): List<FeedbackEntity?> {
-        return feedbackRepository!!.findAll()
+//        return feedbackRepository!!.getAll()
+        return emptyList()
     }
 }
