@@ -7,36 +7,43 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener
 import java.time.OffsetDateTime
 import java.util.*
 
-
-
 @Entity
-@Table(name = "user", schema = "public")
+@Table(schema = "public", name = "user")
 @EntityListeners(
     AuditingEntityListener::class
 )
-data class UserEntity(
+data class UserEntity (
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.UUID)
-    var id: UUID? = null,
+    val id: UUID? = null,
 
     @Column(name = "email")
-    var email: String? = null,
+    val email: String? = null,
 
     @Column(name = "name")
-    var name: String? = null,
+    val name: String? = null,
 
     @Column(name = "password")
-    var password: String? = null,
+    val password: String? = null,
 
     @Column(name = "role")
-    var role: String? = null,
+    val role: String? = null,
+
+    @OneToMany(mappedBy = "user", cascade = [CascadeType.ALL], orphanRemoval = true)
+    val progresses: List<ProgressEntity>? = null,
+
+    @ManyToMany(mappedBy = "users")
+    val answers: List<AnswerEntity>? = null,
+
+    @OneToMany(mappedBy = "user", cascade = [CascadeType.ALL], orphanRemoval = true)
+    val feedbacks: List<FeedbackEntity>? = null,
 
     @Column(name = "creation_date")
     @CreatedDate
-    var creationDate: OffsetDateTime? = null,
+    val creationDate: OffsetDateTime? = null,
 
     @Column(name = "last_update_date")
     @LastModifiedDate
-    var lastUpdateDate: OffsetDateTime? = null
+    val lastUpdateDate: OffsetDateTime? = null
 )

@@ -1,4 +1,4 @@
-package com.example.chinaApp.dao.dto
+package com.example.chinaApp.dto
 
 import org.jetbrains.annotations.NotNull
 

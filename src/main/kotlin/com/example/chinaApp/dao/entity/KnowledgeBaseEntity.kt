@@ -8,26 +8,24 @@ import java.time.OffsetDateTime
 import java.util.*
 
 @Entity
-@Table(schema = "public", name = "feedback")
+@Table(schema = "public", name = "knowledge_base")
 @EntityListeners(
     AuditingEntityListener::class
 )
-data class FeedbackEntity (
+data class KnowledgeBaseEntity(
     @Id
-    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.UUID)
+    @Column(name = "id")
     val id: UUID? = null,
 
-    @Column(name = "feedback_text")
-    val feedbackText: String? = null,
+    @Column(name = "category")
+    val category: String? = null,
 
-    @ManyToOne
-    @JoinColumn(name = "user_id", referencedColumnName = "id")
-    val user: UserEntity? = null,
+    @Column(name = "subcategory")
+    val subcategory: String? = null,
 
-    @ManyToOne
-    @JoinColumn(name = "lesson_id", referencedColumnName = "id")
-    val lesson: LessonEntity? = null,
+    @Column(name = "content")
+    val content: String? = null,
 
     @Column(name = "creation_date")
     @CreatedDate
@@ -36,4 +34,5 @@ data class FeedbackEntity (
     @Column(name = "last_update_date")
     @LastModifiedDate
     val lastUpdateDate: OffsetDateTime? = null
+
 )
