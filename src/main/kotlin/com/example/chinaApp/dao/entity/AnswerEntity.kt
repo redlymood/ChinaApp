@@ -8,26 +8,34 @@ import java.time.OffsetDateTime
 import java.util.*
 
 @Entity
-@Table(schema = "public", name = "feedback")
+@Table(schema = "public", name = "answer")
 @EntityListeners(
     AuditingEntityListener::class
 )
-data class FeedbackEntity (
+data class AnswerEntity (
+
     @Id
-    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.UUID)
+    @Column(name = "id")
     val id: UUID? = null,
 
-    @Column(name = "feedback_text")
-    val feedbackText: String? = null,
+    @Column(name = "answer_text")
+    val answerText: String? = null,
+
+    @Column(name = "is_correct")
+    val isCorrect: Boolean? = null,
+
+    @ManyToMany
+    @JoinTable(
+        name = "answer_user",
+        joinColumns = [JoinColumn(name = "answer_id")],
+        inverseJoinColumns = [JoinColumn(name = "user_id")]
+    )
+    val users: List<UserEntity>? = null,
 
     @ManyToOne
-    @JoinColumn(name = "user_id", referencedColumnName = "id")
-    val user: UserEntity? = null,
-
-    @ManyToOne
-    @JoinColumn(name = "lesson_id", referencedColumnName = "id")
-    val lesson: LessonEntity? = null,
+    @JoinColumn(name = "question_id", referencedColumnName = "id")
+    val question: QuestionEntity? = null,
 
     @Column(name = "creation_date")
     @CreatedDate
