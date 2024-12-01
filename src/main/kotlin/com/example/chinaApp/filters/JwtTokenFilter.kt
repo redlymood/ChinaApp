@@ -1,6 +1,6 @@
-package com.example.chinaApp.dao.filters
+package com.example.chinaApp.filters
 
-import com.example.chinaApp.JwtTokenUtil
+import com.example.chinaApp.util.JwtTokenUtil
 import com.example.chinaApp.dao.service.UserDaoService
 import jakarta.servlet.FilterChain
 import jakarta.servlet.ServletException

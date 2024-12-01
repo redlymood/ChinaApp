@@ -45,7 +45,11 @@ class ObjectConverter {
         return Progress()
     }
 
-    fun User.toDTO(): User {
+    fun UserEntity.toDTO(): User {
         return User()
+    }
+
+    fun FeedbackEntity.toDTO(): Feedback {
+        return Feedback()
     }
 }

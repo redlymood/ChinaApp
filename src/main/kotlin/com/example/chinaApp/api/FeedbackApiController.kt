@@ -1,4 +1,8 @@
-package com.example.chinaApp.api;
+package com.example.chinaApp.api
 
-public class FeedbackApiController {
+import org.springframework.web.bind.annotation.RestController
+
+@RestController
+class FeedbackApiController {
+    
 }
