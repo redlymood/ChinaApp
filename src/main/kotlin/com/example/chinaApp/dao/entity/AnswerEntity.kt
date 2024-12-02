@@ -25,14 +25,6 @@ data class AnswerEntity (
     @Column(name = "is_correct")
     val isCorrect: Boolean? = null,
 
-    @ManyToMany
-    @JoinTable(
-        name = "answer_user",
-        joinColumns = [JoinColumn(name = "answer_id")],
-        inverseJoinColumns = [JoinColumn(name = "user_id")]
-    )
-    val users: List<UserEntity>? = null,
-
     @ManyToOne
     @JoinColumn(name = "question_id", referencedColumnName = "id")
     val question: QuestionEntity? = null,

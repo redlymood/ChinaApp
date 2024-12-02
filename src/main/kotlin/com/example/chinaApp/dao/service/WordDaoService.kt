@@ -9,10 +9,11 @@ import org.springframework.stereotype.Service
 @Service
 @Slf4j
 @RequiredArgsConstructor
-class WordDaoService {
-    private val wordRepository: WordRepository? = null
+class WordDaoService (
+    private val wordRepository: WordRepository
+) {
 
     fun findRandomWord() : WordEntity {
-        return wordRepository!!.findRandomWord()
+        return wordRepository.findRandomWord()
     }
 }

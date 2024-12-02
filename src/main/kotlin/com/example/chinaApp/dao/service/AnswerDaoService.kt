@@ -1,14 +1,20 @@
-package com.example.chinaApp.dao.service;
+package com.example.chinaApp.dao.service
 
-import com.example.chinaApp.dao.repository.AnswerRepository;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Service;
+import com.example.chinaApp.dao.entity.AnswerEntity
+import com.example.chinaApp.dao.repository.AnswerRepository
+import lombok.RequiredArgsConstructor
+import lombok.extern.slf4j.Slf4j
+import org.springframework.stereotype.Service
+import java.util.*
 
 @Service
 @Slf4j
 @RequiredArgsConstructor
-public class AnswerDaoService {
+class AnswerDaoService (
+    private val answerRepository: AnswerRepository
+) {
 
-    private final AnswerRepository answerRepository;
+    fun findAnswersByQuestionId(questionId: UUID): List<AnswerEntity> {
+        return answerRepository.findByQuestionId(questionId)
+    }
 }

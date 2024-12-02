@@ -11,4 +11,6 @@ interface QuestionRepository : JpaRepository<QuestionEntity?, UUID?> {
                 ORDER BY RANDOM()
                 LIMIT 1""")
     fun findRandomQuestion() : QuestionEntity
+
+    fun findByLessonId(lessonId: UUID): List<QuestionEntity>
 }

@@ -4,4 +4,7 @@ import com.example.chinaApp.dao.entity.AnswerEntity
 import org.springframework.data.jpa.repository.JpaRepository
 import java.util.*
 
-interface AnswerRepository : JpaRepository<AnswerEntity?, UUID?>
+interface AnswerRepository : JpaRepository<AnswerEntity?, UUID?> {
+
+    fun findByQuestionId(questionId: UUID): List<AnswerEntity>
+}

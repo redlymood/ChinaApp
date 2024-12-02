@@ -10,5 +10,6 @@ data class Lesson(
     val threshold: Int? = null,
     val description: String? = null,
     val feedbacks: List<Feedback>? = null,
-    val questions: List<Question>? = null
+    val questions: List<Question>? = null,
+    val isFinished: Boolean
 )

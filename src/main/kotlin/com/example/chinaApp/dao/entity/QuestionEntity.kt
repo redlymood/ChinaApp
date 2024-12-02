@@ -22,7 +22,7 @@ data class QuestionEntity (
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: Long? = null,
+    val id: UUID? = null,
 
     @Column(name = "question_rus")
     val questionRus: String? = null,
