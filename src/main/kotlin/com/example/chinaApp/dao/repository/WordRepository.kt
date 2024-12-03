@@ -7,7 +7,7 @@ import java.util.*
 
 interface WordRepository : JpaRepository<WordEntity?, UUID?> {
 
-    @Query("""SELECT * FROM word
+    @Query(nativeQuery = true, value = """SELECT * FROM word
                 ORDER BY RANDOM()
                 LIMIT 1""")
     fun findRandomWord() : WordEntity

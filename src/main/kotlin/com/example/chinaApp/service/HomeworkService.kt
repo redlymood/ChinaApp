@@ -10,7 +10,6 @@ import com.example.chinaApp.exceptions.LessonNotFoundException
 import com.example.chinaApp.exceptions.ProgressIsAlreadyExistException
 import com.example.chinaApp.exceptions.ProgressNotFoundException
 import com.example.chinaApp.exceptions.UserNotFoundException
-import com.example.chinaApp.util.ConverterService
 import org.apache.commons.lang3.ObjectUtils
 import org.springframework.stereotype.Service
 import java.util.*

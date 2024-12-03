@@ -2,7 +2,6 @@ package com.example.chinaApp.service
 
 import com.example.chinaApp.dao.service.KnowledgeBaseDaoService
 import com.example.chinaApp.dto.KnowledgeBase
-import com.example.chinaApp.util.ConverterService
 import org.springframework.stereotype.Service
 
 @Service

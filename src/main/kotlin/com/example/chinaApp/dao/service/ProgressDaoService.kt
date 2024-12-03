@@ -2,14 +2,10 @@ package com.example.chinaApp.dao.service
 
 import com.example.chinaApp.dao.entity.ProgressEntity
 import com.example.chinaApp.dao.repository.ProgressRepository
-import lombok.RequiredArgsConstructor
-import lombok.extern.slf4j.Slf4j
 import org.springframework.stereotype.Service
 import java.util.*
 
 @Service
-@Slf4j
-@RequiredArgsConstructor
 class ProgressDaoService (
     private val progressRepository: ProgressRepository
 ) {

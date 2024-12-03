@@ -8,7 +8,7 @@ import java.util.*
 
 interface ProgressRepository : JpaRepository<ProgressEntity?, UUID?> {
 
-    @Query("""
+    @Query(nativeQuery = true, value = """
         select count(*)
         from progress as p inner join lesson as l on p.lesson_id = l.id
         where p.user_id = :user_id and p.status = 'completed'

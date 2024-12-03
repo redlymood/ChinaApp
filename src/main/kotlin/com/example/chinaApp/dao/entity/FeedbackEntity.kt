@@ -21,10 +21,6 @@ data class FeedbackEntity (
     @Column(name = "feedback_text")
     val feedbackText: String? = null,
 
-    val userId: UUID? = null,
-
-    val lessonId: UUID? = null,
-
     @ManyToOne
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     val user: UserEntity? = null,

@@ -7,7 +7,6 @@ import com.example.chinaApp.dto.Feedback
 import com.example.chinaApp.dto.User
 import com.example.chinaApp.dto.UserInfo
 import com.example.chinaApp.exceptions.UserNotFoundException
-import com.example.chinaApp.util.ConverterService
 import org.springframework.stereotype.Service
 import java.util.UUID
 

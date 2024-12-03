@@ -1,10 +1,10 @@
-package com.example.chinaApp.util
+package com.example.chinaApp.service
 
 import com.example.chinaApp.dao.entity.*
 import com.example.chinaApp.dto.*
-import lombok.experimental.UtilityClass
+import org.springframework.stereotype.Service
 
-@UtilityClass
+@Service
 class ConverterService {
 
     fun convert(entity: KnowledgeBaseEntity): KnowledgeBase {

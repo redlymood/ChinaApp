@@ -1,7 +1,6 @@
 package com.example.chinaApp.dao.entity
 
 import jakarta.persistence.*
-import lombok.*
 import org.springframework.data.annotation.CreatedDate
 import org.springframework.data.annotation.LastModifiedDate
 import org.springframework.data.jpa.domain.support.AuditingEntityListener
@@ -9,19 +8,14 @@ import java.time.OffsetDateTime
 import java.util.*
 
 @Entity
-@Getter
-@Setter
 @Table(schema = "public", name = "question")
 @EntityListeners(
     AuditingEntityListener::class
 )
-@AllArgsConstructor
-@NoArgsConstructor
-@Builder
 data class QuestionEntity (
     @Id
     @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.UUID)
     val id: UUID? = null,
 
     @Column(name = "question_rus")

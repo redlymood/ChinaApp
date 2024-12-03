@@ -6,7 +6,6 @@ import com.example.chinaApp.dao.service.QuestionDaoService
 import com.example.chinaApp.dao.service.WordDaoService
 import com.example.chinaApp.dto.Question
 import com.example.chinaApp.dto.Word
-import com.example.chinaApp.util.ConverterService
 import org.springframework.stereotype.Service
 
 @Service

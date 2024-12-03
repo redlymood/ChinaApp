@@ -12,7 +12,7 @@ import java.util.UUID
 
 @RestController
 class AdminApiController(
-    val adminService: AdminService
+    private val adminService: AdminService
 ) {
 
     @GetMapping("/admin/feedbacks")
