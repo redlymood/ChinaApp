@@ -2,20 +2,31 @@ package com.example.chinaApp.api
 
 import com.example.chinaApp.dto.Feedback
 import com.example.chinaApp.dto.User
+import com.example.chinaApp.dto.UserInfo
 import com.example.chinaApp.service.AdminService
+import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.RestController
+import java.util.UUID
 
 @RestController
-class AdminApiController(val adminService: AdminService) {
+class AdminApiController(
+    private val adminService: AdminService
+) {
 
     @GetMapping("/admin/feedbacks")
-    fun getFeedbackList(): List<Feedback> {
-        return adminService.getFeedbackList()
+    fun getFeedbackList(): ResponseEntity<List<Feedback>> {
+        return ResponseEntity.ok().body(adminService.getFeedbackList())
     }
 
     @GetMapping("/admin/users")
-    fun getUserList(): List<User> {
-        return adminService.getUserList()
+    fun getUserList(): ResponseEntity<List<User>> {
+        return ResponseEntity.ok().body(adminService.getUserList())
+    }
+
+    @GetMapping("/admin/user/{user_id}/details")
+    fun getUserInfo(@PathVariable userId: UUID): ResponseEntity<UserInfo> {
+        return ResponseEntity.ok().body(adminService.getUserInfo(userId))
     }
 }

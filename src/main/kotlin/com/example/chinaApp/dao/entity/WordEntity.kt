@@ -5,6 +5,7 @@ import org.springframework.data.annotation.CreatedDate
 import org.springframework.data.annotation.LastModifiedDate
 import org.springframework.data.jpa.domain.support.AuditingEntityListener
 import java.time.OffsetDateTime
+import java.util.*
 
 @Entity
 @Table(schema = "public", name = "word")
@@ -15,7 +16,7 @@ data class WordEntity (
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    val id: Long? = null,
+    val id: UUID? = null,
 
     @Column(name = "word_ch")
     val wordCh: String? = null,

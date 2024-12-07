@@ -7,5 +7,5 @@ data class Answer(
     val answerText: String? = null,
     val isCorrect: Boolean? = null,
     val users: List<User>? = null,
-    val question: Question? = null
+    val questionId: UUID? = null
 )

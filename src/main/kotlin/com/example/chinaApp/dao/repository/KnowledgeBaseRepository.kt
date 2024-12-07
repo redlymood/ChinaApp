@@ -8,10 +8,10 @@ import java.util.*
 
 interface KnowledgeBaseRepository : JpaRepository<KnowledgeBaseEntity?, UUID?> {
 
-    @Query("SELECT DISTINCT k.category FROM KnowledgeBaseEntity k")
+    @Query(nativeQuery = true, value = """SELECT DISTINCT k.category FROM KnowledgeBaseEntity k""")
     fun findAllCategories() : List<String>
 
-    @Query("SELECT DISTINCT k.subcategory FROM KnowledgeBaseEntity k WHERE k.category = :category")
+    @Query(nativeQuery = true, value = """SELECT DISTINCT k.subcategory FROM KnowledgeBaseEntity k WHERE k.category = :category""")
     fun findAllSubcategoriesByCategory(@Param("category") category: String) : List<String>
 
     fun findByCategoryAndSubcategory(category: String, subcategory: String): List<KnowledgeBaseEntity>

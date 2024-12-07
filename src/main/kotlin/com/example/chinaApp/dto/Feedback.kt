@@ -5,6 +5,6 @@ import java.util.*
 data class Feedback(
     val id: UUID? = null,
     val feedbackText: String? = null,
-    val user: User? = null,
-    val lesson: Lesson? = null,
+    val userId: UUID? = null,
+    val lessonId: UUID? = null,
 )

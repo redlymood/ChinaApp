@@ -1,7 +1,7 @@
 package com.example.chinaApp.config
 
 import com.example.chinaApp.filters.JwtTokenFilter
-import com.example.chinaApp.dao.service.JwtUserDetailsService
+import com.example.chinaApp.service.JwtUserDetailsService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration

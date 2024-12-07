@@ -6,20 +6,21 @@ import com.example.chinaApp.dao.service.QuestionDaoService
 import com.example.chinaApp.dao.service.WordDaoService
 import com.example.chinaApp.dto.Question
 import com.example.chinaApp.dto.Word
-import com.example.chinaApp.util.ObjectConverter
+import org.springframework.stereotype.Service
 
-class NewsService (private val objectConverter: ObjectConverter) {
-
-    private val wordDaoService: WordDaoService? = null
-    private val questionDaoService: QuestionDaoService? = null
+@Service
+class NewsService (private val objectConverter: ConverterService,
+                   private val wordDaoService: WordDaoService,
+                   private val questionDaoService: QuestionDaoService
+    ) {
 
     fun getDailyWord(): Word {
-        val wordEntity: WordEntity = wordDaoService!!.findRandomWord()
-        return objectConverter.run { wordEntity.toDTO() }
+        val wordEntity: WordEntity = wordDaoService.findRandomWord()
+        return objectConverter.convert(wordEntity)
     }
 
     fun getDailyQuestion(): Question {
-        val questionEntity: QuestionEntity = questionDaoService!!.findRandomQuestion()
-        return objectConverter.run { questionEntity.toDTO() }
+        val questionEntity: QuestionEntity = questionDaoService.findRandomQuestion()
+        return objectConverter.convert(questionEntity)
     }
 }

@@ -77,7 +77,7 @@ class JwtTokenFilter(val userService: UserDaoService) : OncePerRequestFilter() {
                 return User(user.email, user.password, emptyList())
             }
         }
-        throw Exception("jwtSubject is null")
+        throw RuntimeException("jwtSubject is null")
     }
 
 

@@ -33,9 +33,6 @@ data class UserEntity (
     @OneToMany(mappedBy = "user", cascade = [CascadeType.ALL], orphanRemoval = true)
     val progresses: List<ProgressEntity>? = null,
 
-    @ManyToMany(mappedBy = "users")
-    val answers: List<AnswerEntity>? = null,
-
     @OneToMany(mappedBy = "user", cascade = [CascadeType.ALL], orphanRemoval = true)
     val feedbacks: List<FeedbackEntity>? = null,
 

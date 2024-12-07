@@ -7,8 +7,13 @@ import java.util.*
 
 interface QuestionRepository : JpaRepository<QuestionEntity?, UUID?> {
 
-    @Query("""SELECT * FROM question
+    @Query(nativeQuery = true, value = """SELECT * FROM question
                 ORDER BY RANDOM()
                 LIMIT 1""")
     fun findRandomQuestion() : QuestionEntity
+
+    @Query(nativeQuery = true, value = """select question.* from question q
+        |inner join lesson_question lq on q.id = lq.question_id
+        |where lq.lesson_id = :lessonId""")
+    fun findByLessonId(lessonId: UUID): List<QuestionEntity>
 }

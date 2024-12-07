@@ -1,4 +1,4 @@
-package com.example.chinaApp.dao.service
+package com.example.chinaApp.service
 
 import com.example.chinaApp.dao.repository.UserRepository
 import org.springframework.security.core.userdetails.User
