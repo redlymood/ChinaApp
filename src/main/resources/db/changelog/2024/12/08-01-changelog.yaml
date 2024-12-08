@@ -1,0 +1,200 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1733661369806-1
+      author: mike
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_answer
+                  name: id
+                  type: UUID
+              - column:
+                  name: answer_text
+                  type: VARCHAR(255)
+              - column:
+                  name: is_correct
+                  type: BOOLEAN
+              - column:
+                  name: question_id
+                  type: UUID
+              - column:
+                  name: creation_date
+                  type: timestamp
+              - column:
+                  name: last_update_date
+                  type: timestamp
+            tableName: answer
+  - changeSet:
+      id: 1733661369806-2
+      author: mike
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_knowledge_base
+                  name: id
+                  type: UUID
+              - column:
+                  name: category
+                  type: VARCHAR(255)
+              - column:
+                  name: subcategory
+                  type: VARCHAR(255)
+              - column:
+                  name: content
+                  type: VARCHAR(255)
+              - column:
+                  name: creation_date
+                  type: timestamp
+              - column:
+                  name: last_update_date
+                  type: timestamp
+            tableName: knowledge_base
+  - changeSet:
+      id: 1733661369806-3
+      author: mike
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_lesson
+                  name: id
+                  type: UUID
+              - column:
+                  name: lesson_number
+                  type: VARCHAR(255)
+              - column:
+                  name: name_rus
+                  type: VARCHAR(255)
+              - column:
+                  name: name_ch
+                  type: VARCHAR(255)
+              - column:
+                  name: threshold
+                  type: INT
+              - column:
+                  name: description
+                  type: VARCHAR(255)
+              - column:
+                  name: creation_date
+                  type: timestamp
+              - column:
+                  name: last_update_date
+                  type: timestamp
+            tableName: lesson
+  - changeSet:
+      id: 1733661369806-4
+      author: mike
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                  name: lesson_id
+                  type: UUID
+              - column:
+                  constraints:
+                    nullable: false
+                  name: question_id
+                  type: UUID
+            tableName: lesson_question
+  - changeSet:
+      id: 1733661369806-5
+      author: mike
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_progress
+                  name: id
+                  type: UUID
+              - column:
+                  name: status
+                  type: VARCHAR(255)
+              - column:
+                  name: user_id
+                  type: UUID
+              - column:
+                  name: lesson_id
+                  type: UUID
+              - column:
+                  name: creation_date
+                  type: timestamp
+              - column:
+                  name: last_update_date
+                  type: timestamp
+            tableName: progress
+  - changeSet:
+      id: 1733661369806-6
+      author: mike
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_question
+                  name: id
+                  type: UUID
+              - column:
+                  name: question_rus
+                  type: VARCHAR(255)
+              - column:
+                  name: question_ch
+                  type: VARCHAR(255)
+              - column:
+                  name: creation_date
+                  type: timestamp
+              - column:
+                  name: last_update_date
+                  type: timestamp
+            tableName: question
+  - changeSet:
+      id: 1733661369806-7
+      author: mike
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_word
+                  name: id
+                  type: UUID
+              - column:
+                  name: word_ch
+                  type: VARCHAR(255)
+              - column:
+                  name: word_ru
+                  type: VARCHAR(255)
+              - column:
+                  name: creation_date
+                  type: timestamp
+              - column:
+                  name: last_update_date
+                  type: timestamp
+            tableName: word
+

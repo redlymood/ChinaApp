@@ -33,3 +33,5 @@ databaseChangeLog:
                   type: timestamp
   - include:
       file: db/changelog/2024/11/17-01-changelog.yaml
+  - include:
+      file: db/changelog/2024/12/08-01-changelog.yaml
