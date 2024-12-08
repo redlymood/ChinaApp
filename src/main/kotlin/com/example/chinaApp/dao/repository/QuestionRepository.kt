@@ -12,8 +12,8 @@ interface QuestionRepository : JpaRepository<QuestionEntity?, UUID?> {
                 LIMIT 1""")
     fun findRandomQuestion() : QuestionEntity
 
-    @Query(nativeQuery = true, value = """select question.* from question q
-        |inner join lesson_question lq on q.id = lq.question_id
-        |where lq.lesson_id = :lessonId""")
+    @Query(nativeQuery = true, value = """select q.* from question q
+        inner join lesson_question lq on q.id = lq.question_id
+        where lq.lesson_id = :lessonId""")
     fun findByLessonId(lessonId: UUID): List<QuestionEntity>
 }
