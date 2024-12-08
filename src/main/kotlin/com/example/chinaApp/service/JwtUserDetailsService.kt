@@ -19,7 +19,7 @@ class JwtUserDetailsService(
         }
         val user = entity.get()
         return User.builder()
-            .username(user.name)
+            .username(user.email)
             .password(user.password)
             .roles(user.role)
             .build()

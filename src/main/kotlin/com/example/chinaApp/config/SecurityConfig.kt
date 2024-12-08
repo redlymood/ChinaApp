@@ -53,7 +53,9 @@ class WebSecurityConfig {
     @Throws(Exception::class)
     fun filterChain(http: HttpSecurity, jwtTokenFilter: JwtTokenFilter): SecurityFilterChain {
         http.authorizeHttpRequests { auth ->
-            auth.requestMatchers("/api/auth/**").permitAll()
+            auth
+                .requestMatchers("/login").permitAll()
+                .requestMatchers("/register").permitAll()
                 .anyRequest().authenticated()
         }
 
