@@ -38,7 +38,17 @@ class ObjectConverter {
     }
 
     fun LessonEntity.toDTO(): Lesson {
-        return Lesson()
+        return Lesson(
+            id = this.id,
+            lessonNumber = this.lessonNumber,
+            nameRus = this.nameRus,
+            nameCh = this.nameCh,
+            threshold = this.threshold,
+            description = this.description,
+            feedbacks = this.feedbacks?.map { it.toDTO() },
+            questions = this.questions?.map { it.toDTO() },
+            isFinished = false,
+        )
     }
 
     fun ProgressEntity.toDTO(): Progress {

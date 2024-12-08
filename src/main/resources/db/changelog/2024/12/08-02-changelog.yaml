@@ -1,0 +1,36 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1733663427870-1
+      author: mike
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addColumn:
+            columns:
+              - column:
+                  name: lesson_id
+                  type: UUID
+            schemaName: public
+            tableName: feedback
+  - changeSet:
+      id: 1733663427870-2
+      author: mike
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: lesson_id
+            baseTableName: feedback
+            baseTableSchemaName: public
+            constraintName: FK_FEEDBACK_ON_LESSON
+            referencedColumnNames: id
+            referencedTableName: lesson
+            referencedTableSchemaName: public
+  - changeSet:
+      id: 1733663427870-3
+      author: mike
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - dropTable:
+            cascadeConstraints: true
+            schemaName: public
+            tableName: lesson_question
+
