@@ -25,8 +25,8 @@ class AdminApiController(
         return ResponseEntity.ok().body(adminService.getUserList())
     }
 
-    @GetMapping("/admin/user/{user_id}/details")
-    fun getUserInfo(@PathVariable userId: UUID): ResponseEntity<UserInfo> {
-        return ResponseEntity.ok().body(adminService.getUserInfo(userId))
+    @GetMapping("/admin/user/{id}/details")
+    fun getUserInfo(@PathVariable id: UUID): ResponseEntity<UserInfo> {
+        return ResponseEntity.ok().body(adminService.getUserInfo(id))
     }
 }
